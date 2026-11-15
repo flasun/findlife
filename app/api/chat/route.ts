@@ -2,7 +2,6 @@ import Anthropic from "@anthropic-ai/sdk";
 import { OP_COM_SYSTEM_PROMPT } from "@/lib/op-com-prompt";
 
 export const runtime = "nodejs";
-export const maxDuration = 60;
 
 type ClientMessage = {
   role: "user" | "assistant";

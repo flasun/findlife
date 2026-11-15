@@ -21,9 +21,16 @@ Open http://localhost:3000.
 - Streaming via `messages.stream()`, `cache_control: ephemeral` on the system block
 - Conversation persists in `localStorage` (no server-side storage in v0)
 
-## Deploy
+## Deploy (Cloudflare Workers)
 
-Set `ANTHROPIC_API_KEY` in your hosting provider's environment, then deploy. The repo is configured for Vercel.
+The app runs on Cloudflare Workers through the [OpenNext adapter](https://opennext.js.org/cloudflare), as the Worker `findlife` at https://findlife.racason.workers.dev.
+
+1. Store the API key as a Worker secret (once): `pnpm exec wrangler secret put ANTHROPIC_API_KEY`
+2. Deploy, either way:
+   - From your machine: `pnpm deploy:cf` (builds with `opennextjs-cloudflare build`, then runs `wrangler deploy`; run `pnpm exec wrangler login` first).
+   - From GitHub: add the repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, then run the **Deploy to Cloudflare** workflow from the Actions tab.
+
+`pnpm preview:cf` builds the Worker and serves it locally with `wrangler dev` (local secrets go in `.dev.vars`, e.g. `ANTHROPIC_API_KEY=...`). `pnpm dev` is still the fastest loop for UI work.
 
 ## Caching note
 

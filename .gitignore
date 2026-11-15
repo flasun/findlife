@@ -17,9 +17,13 @@ build
 .env*.local
 .env
 
+# cloudflare
+.open-next/
+.wrangler/
+.dev.vars*
+
 # misc
 .DS_Store
 *.pem
-.vercel
 *.tsbuildinfo
 next-env.d.ts
